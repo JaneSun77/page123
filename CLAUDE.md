@@ -2,9 +2,9 @@
 
 This file provides guidance to AI assistants (e.g. Claude) when working with this repository.
 
-## Repository Status
+## Repository Overview
 
-This repository is currently in its initial state. No source code, configuration, or build tooling has been committed yet. This file serves as a foundation for conventions and workflows to follow as the project develops.
+A pure static webpage project — no build tools or package manager required. Open `index.html` directly in a browser to run it. The project includes a responsive layout, a contact form with client-side validation, and an optional API endpoint for form submission.
 
 ---
 
@@ -62,79 +62,77 @@ Before taking any of these actions, explicitly tell the user what you're about t
 
 ---
 
-## Project Structure (To Be Defined)
-
-Once the project is initialized, document the structure here. Example:
+## Project Structure
 
 ```
 /
-├── src/                  # Application source code
-│   ├── components/       # Reusable UI components
-│   ├── pages/            # Route-level page components
-│   └── lib/              # Shared utilities and helpers
-├── public/               # Static assets
-├── tests/                # Test files mirroring src/ structure
-├── .github/              # GitHub Actions workflows
-├── package.json          # Dependencies and scripts
-└── CLAUDE.md             # This file
+├── index.html        # Single-page entry point; all sections live here
+├── style.css         # All styles; uses CSS custom properties (variables)
+├── script.js         # Vanilla JS: form handling, nav highlight, env config
+├── .env.example      # Template for environment variables — copy to .env
+├── .gitignore        # Excludes .env, node_modules, OS/editor artifacts
+└── CLAUDE.md         # This file
 ```
+
+### Key conventions
+
+- **Single HTML file** — all pages/sections are `<section id="...">` elements within `index.html`.
+- **BEM-flavored CSS naming** — e.g. `.nav__logo`, `.btn--primary`, `.card__title`.
+- **CSS custom properties** — all colors, spacing, shadows, and transitions are defined as `--variables` in `:root` inside `style.css`. Change a value there to update it site-wide.
+- **No framework, no bundler** — plain HTML/CSS/JS. Do not introduce a build step without discussion.
+- **Vanilla JS modules** — each concern is its own `init*()` function called from the `DOMContentLoaded` listener in `script.js`.
 
 ---
 
-## Common Commands (To Be Defined)
+## Common Commands
 
-Once build tooling is configured, record the commands here. Typical examples:
+No build step is required. Use any of the following to preview the site locally:
 
 ```bash
-# Install dependencies
-npm install
+# Python (most systems have this pre-installed)
+python3 -m http.server 8080
 
-# Start development server
-npm run dev
+# Node.js (if available)
+npx serve .
 
-# Run tests
-npm test
-
-# Lint and format
-npm run lint
-npm run format
-
-# Build for production
-npm run build
+# VS Code: install the "Live Server" extension and click "Go Live"
 ```
 
----
-
-## Code Style Conventions (To Be Defined)
-
-Document linting rules, formatting preferences (Prettier, ESLint, etc.), and naming conventions here once tooling is established. Until then, follow these defaults:
-
-- Use 2-space indentation.
-- Prefer `const` over `let`; avoid `var`.
-- Use descriptive names — avoid single-letter variables outside of loop counters.
-- Keep functions small and focused on a single responsibility.
-- Avoid deeply nested logic; prefer early returns.
+Then open `http://localhost:8080` in your browser.
 
 ---
 
-## Testing Conventions (To Be Defined)
+## Code Style Conventions
 
-Once a test framework is chosen, document it here. Until then:
-
-- Write tests for all new public-facing functions and components.
-- Test file names should mirror the source file: `src/lib/utils.ts` → `tests/lib/utils.test.ts`.
-- Prefer unit tests for logic; integration tests for API endpoints; e2e tests for critical user flows.
+- **Indentation**: 2 spaces (HTML, CSS, JS).
+- **JS**: `const` by default; `let` when reassignment is needed; no `var`.
+- **CSS**: Add new design tokens as `--custom-properties` in `:root`, not as hard-coded values inline.
+- **Naming**: BEM for CSS classes (`.block__element--modifier`); camelCase for JS identifiers.
+- **Functions**: Small, single-responsibility `init*()` or action functions. Avoid nesting beyond 2 levels; prefer early returns.
+- **No framework**: Do not introduce React, Vue, or any npm dependency without explicit approval.
 
 ---
 
-## Environment Variables (To Be Defined)
+## Testing
 
-List all required environment variables here once the project has configuration needs. Example format:
+No automated test framework is configured. Manual testing checklist:
+
+- [ ] Open `index.html` in Chrome, Firefox, and Safari (or mobile).
+- [ ] Verify nav links scroll to the correct section.
+- [ ] Submit the contact form with empty fields — validation errors should appear.
+- [ ] Submit with an invalid email — email error should appear.
+- [ ] Submit with all valid fields — success message should appear and form resets.
+- [ ] Resize to mobile width (< 640 px) — layout should stack correctly.
+
+---
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in values. **Never commit `.env`.**
+
+Since this is a pure static site (no server), environment variables must be injected at deploy time or consumed via the `CONFIG` object at the top of `script.js`.
 
 | Variable | Required | Description |
 |---|---|---|
-| `DATABASE_URL` | Yes | Connection string for the primary database |
-| `API_KEY` | Yes | Secret key for the external API |
-| `NODE_ENV` | No | `development` \| `production` \| `test` (defaults to `development`) |
-
-Copy `.env.example` to `.env` and fill in the values — never commit `.env`.
+| `ENV_CONTACT_ENDPOINT` | No | POST endpoint for the contact form. If empty, the form simulates success locally. |
+| `ENV_SITE_NAME` | No | Site title override (defaults to `page123`). |
