@@ -3,69 +3,119 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="page123 - 静态网页项目" />
-  <title>page123</title>
+  <meta name="description" content="page123" />
+  <title>PAGE·123</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- Background grid + scanline overlay -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
   <header class="site-header">
     <nav class="nav">
-      <div class="nav__logo">page123</div>
+      <div class="nav__logo">PAGE<span class="nav__logo-accent">·123</span></div>
       <ul class="nav__links">
-        <li><a href="#home">首页</a></li>
-        <li><a href="#about">关于</a></li>
-        <li><a href="#contact">联系</a></li>
+        <li><a href="#home"   data-zh="首页"   data-en="Home">首页</a></li>
+        <li><a href="#about"  data-zh="关于"   data-en="About">关于</a></li>
+        <li><a href="#contact" data-zh="联系"  data-en="Contact">联系</a></li>
       </ul>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
     </nav>
   </header>
 
   <main>
+    <!-- Hero -->
     <section id="home" class="hero">
+      <div class="hero__bg-circles" aria-hidden="true">
+        <span class="circle circle--1"></span>
+        <span class="circle circle--2"></span>
+        <span class="circle circle--3"></span>
+      </div>
       <div class="hero__content">
-        <h1 class="hero__title">欢迎来到 page123</h1>
-        <p class="hero__subtitle">这是一个简洁的静态网页项目</p>
-        <a href="#about" class="btn btn--primary">了解更多</a>
+        <div class="hero__eyebrow">
+          <span class="blink">▮</span>
+          <span data-zh="系统初始化完成" data-en="SYSTEM INITIALIZED">系统初始化完成</span>
+        </div>
+        <h1 class="hero__title" data-zh="欢迎踏入 PAGE·123" data-en="ENTER PAGE·123">欢迎踏入 PAGE·123</h1>
+        <p class="hero__subtitle" data-zh="下一代交互界面 · 超越边界 · 连接未来" data-en="Next-Gen Interface · Beyond Limits · Connected Future">下一代交互界面 · 超越边界 · 连接未来</p>
+        <div class="hero__actions">
+          <a href="#about" class="btn btn--primary">
+            <span data-zh="探索系统" data-en="Explore">探索系统</span>
+            <span class="btn__arrow">→</span>
+          </a>
+          <a href="#contact" class="btn btn--ghost">
+            <span data-zh="建立连接" data-en="Connect">建立连接</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero__hud" aria-hidden="true">
+        <span class="hud-line">SYS::ONLINE</span>
+        <span class="hud-line">LAT: 31.2304° N</span>
+        <span class="hud-line">LNG: 121.4737° E</span>
+        <span class="hud-line">VER: 1.0.0</span>
       </div>
     </section>
 
+    <!-- About / Features -->
     <section id="about" class="section">
       <div class="container">
-        <h2 class="section__title">关于</h2>
-        <p class="section__text">这里是关于页面的内容区域，你可以在此介绍项目或个人信息。</p>
+        <div class="section__header">
+          <span class="section__tag" data-zh="// 系统模块" data-en="// MODULES">// 系统模块</span>
+          <h2 class="section__title" data-zh="核心功能" data-en="Core Features">核心功能</h2>
+          <p class="section__text" data-zh="三项核心模块，构建极致体验" data-en="Three core modules. One seamless experience.">三项核心模块，构建极致体验</p>
+        </div>
         <div class="cards">
           <div class="card">
-            <h3 class="card__title">特性一</h3>
-            <p class="card__text">简洁、轻量，无需构建工具即可运行。</p>
+            <div class="card__icon">⬡</div>
+            <div class="card__id">MOD-01</div>
+            <h3 class="card__title" data-zh="轻量引擎" data-en="Lightweight Core">轻量引擎</h3>
+            <p class="card__text" data-zh="零依赖，纯原生技术栈，无需构建工具即可启动运行。" data-en="Zero dependencies. Pure native stack. No build tools required.">零依赖，纯原生技术栈，无需构建工具即可启动运行。</p>
           </div>
           <div class="card">
-            <h3 class="card__title">特性二</h3>
-            <p class="card__text">响应式设计，适配桌面与移动端。</p>
+            <div class="card__icon">◈</div>
+            <div class="card__id">MOD-02</div>
+            <h3 class="card__title" data-zh="响应矩阵" data-en="Adaptive Matrix">响应矩阵</h3>
+            <p class="card__text" data-zh="自适应布局系统，精准适配桌面端与移动端所有分辨率。" data-en="Adaptive layout system optimized for all screen resolutions.">自适应布局系统，精准适配桌面端与移动端所有分辨率。</p>
           </div>
           <div class="card">
-            <h3 class="card__title">特性三</h3>
-            <p class="card__text">易于扩展，按需添加功能与样式。</p>
+            <div class="card__icon">⬢</div>
+            <div class="card__id">MOD-03</div>
+            <h3 class="card__title" data-zh="扩展协议" data-en="Extension Protocol">扩展协议</h3>
+            <p class="card__text" data-zh="模块化架构设计，可按需接入任意功能与第三方接口。" data-en="Modular architecture. Plug in any feature or third-party API.">模块化架构设计，可按需接入任意功能与第三方接口。</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact" class="section section--alt">
       <div class="container">
-        <h2 class="section__title">联系</h2>
+        <div class="section__header">
+          <span class="section__tag" data-zh="// 通信频道" data-en="// COMMS">// 通信频道</span>
+          <h2 class="section__title" data-zh="建立连接" data-en="Establish Link">建立连接</h2>
+        </div>
         <form class="contact-form" id="contactForm" novalidate>
           <div class="form-group">
-            <label for="name">姓名</label>
-            <input type="text" id="name" name="name" placeholder="请输入姓名" required />
+            <label for="name" data-zh="识别码 / 姓名" data-en="ID / Name">识别码 / 姓名</label>
+            <input type="text" id="name" name="name" data-zh-placeholder="输入识别码" data-en-placeholder="Enter your name" placeholder="输入识别码" required />
           </div>
           <div class="form-group">
-            <label for="email">邮箱</label>
-            <input type="email" id="email" name="email" placeholder="请输入邮箱" required />
+            <label for="email" data-zh="通信地址 / 邮箱" data-en="Signal / Email">通信地址 / 邮箱</label>
+            <input type="email" id="email" name="email" data-zh-placeholder="输入通信地址" data-en-placeholder="Enter your email" placeholder="输入通信地址" required />
           </div>
           <div class="form-group">
-            <label for="message">留言</label>
-            <textarea id="message" name="message" rows="4" placeholder="请输入留言内容" required></textarea>
+            <label for="message" data-zh="传输内容 / 留言" data-en="Payload / Message">传输内容 / 留言</label>
+            <textarea id="message" name="message" rows="4" data-zh-placeholder="输入传输内容..." data-en-placeholder="Enter your message..." placeholder="输入传输内容..." required></textarea>
           </div>
-          <button type="submit" class="btn btn--primary">发送</button>
+          <button type="submit" class="btn btn--primary">
+            <span data-zh="发送信号" data-en="Transmit">发送信号</span>
+            <span class="btn__arrow">→</span>
+          </button>
           <p class="form-feedback" id="formFeedback" aria-live="polite"></p>
         </form>
       </div>
@@ -74,7 +124,11 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> page123. All rights reserved.</p>
+      <p class="footer__text">
+        <span class="footer__copy">&copy; <span id="year"></span> PAGE·123</span>
+        <span class="footer__sep"> · </span>
+        <span data-zh="保留所有权利" data-en="All rights reserved">保留所有权利</span>
+      </p>
     </div>
   </footer>
 
